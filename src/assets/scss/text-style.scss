@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "Montserrat";
+  src:
+    url("@/assets/fonts/Montserrat-Regular.woff") format("woff"),
+    url("@/assets/fonts/Montserrat-Regular.ttf") format("ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src:
+    url("@/assets/fonts/Montserrat-Medium.woff") format("woff"),
+    url("@/assets/fonts/Montserrat-Medium.ttf") format("ttf");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src:
+    url("@/assets/fonts/Montserrat-SemiBold.woff") format("woff"),
+    url("@/assets/fonts/Montserrat-SemiBold.ttf") format("ttf");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@mixin h1 {
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: 600;
+}
+
+@mixin h2 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+}
+
+@mixin h3 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+@mixin info-text {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+@mixin normal-text {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+@mixin medium-text {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+@mixin second-text {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
