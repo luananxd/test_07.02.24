@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 48" fill="none">
+    <path fill="currentColor" fill-rule="evenodd" d="M24 48A24 24 0 1 1 39.4 5.6L21 24l18.4 18.4A23.9 23.9 0 0 1 24 48Z" clip-rule="evenodd"/>
+    <circle cx="4.5" cy="4.5" r="4.5" fill="currentColor" transform="matrix(-1 0 0 1 48 19)"/>
+    <circle cx="4.5" cy="4.5" r="4.5" fill="currentColor" transform="matrix(-1 0 0 1 63 19)"/>
+    <circle cx="4.5" cy="4.5" r="4.5" fill="currentColor" transform="matrix(-1 0 0 1 78 19)"/>
+  </symbol>
+</svg>
