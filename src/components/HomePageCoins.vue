@@ -1,21 +1,25 @@
+
+import AppCheckbox from './UI/AppCheckbox.vue';
 <template>
-  <section class="coins">
+  <section class="coins section-block">
     <div class="coins__wrapper center-wrapper">
       <span class="coins__number section-number">02</span>
-      <div class="coins__content-wrapper">
-        <h2 class="coins__title section-title">Кошелёк криптовалют</h2>
-        <div class="coins__quantity-line">
-          <span class="coins__coin"></span>
-          <span class="coins__coin"></span>
-        </div>
-        <p class="coins__balance"><span class="coins__count">45</span> biorobo монет</p>
-        <div class="coins__income">
-          <button class="coins__button" type="button">Нацыганить</button>
-          <label class="coins__label checkbox">
-            <input class="checkbox__input visually-hidden" type="checkbox" name="enable-modificator">
-            <p class="checkbox__title">Цыганить по 5 монет</p>
-          </label>
-        </div>
+      <h2 class="coins__title section-title">Кошелёк криптовалют</h2>
+      <div class="coins__quantity-line">
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+        <span class="coins__coin"></span>
+      </div>
+      <p class="coins__balance"><span class="coins__count">45</span> biorobo монет</p>
+      <div class="coins__income">
+        <button class="coins__button" type="button">Нацыганить</button>
+        <AppCheckbox class="coins__label">Цыганить по 5 монет</AppCheckbox>
       </div>
     </div>
   </section>
@@ -23,30 +27,18 @@
 
 <style lang="scss">
 @import "@/assets/scss/text-style.scss";
+@import "@/assets/scss/device-width.scss";
 @import "@/assets/scss/colors.scss";
-
-.coins {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.coins__number {
-  top: 9px;
-}
-
-.coins__content-wrapper {
-  margin-left: 130px;
-}
-
-.coins__title {
-  @include h2;
-  margin-top: 0;
-  margin-bottom: 60px;
-}
 
 .coins__quantity-line {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
   margin-bottom: 24px;
+
+  @media(max-width: $phone-max) {
+    margin-bottom: 34px;
+  }
 }
 
 .coins__coin {
@@ -58,13 +50,23 @@
   background-repeat: no-repeat;
 }
 
-// .coins__coin:not(:first-child) {
-//   margin-left: -10px;
-// }
+.coins__coin:not(:first-child) {
+  margin-left: -9px;
+  mask-image: url("@/assets/img/coin-mask.svg");
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  mask-position: -24px;
+}
 
 .coins__balance {
-  margin-bottom: 40px;
+  margin-bottom: 44px;
+  font-size: 24px;
   color: $light-blue;
+
+  @media(max-width: $pc-max) {
+    @include info-text;
+    margin-bottom: 32px;
+  }
 }
 
 .coins__count {
@@ -73,13 +75,19 @@
 
 .coins__income {
   display: flex;
+
+  @media(max-width: $phone-max) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 .coins__button {
   position: relative;
-  margin-right: 67px;
+  margin-right: 31px;
   padding: 0;
   @include normal-text;
+  font-family: "Montserrat", "Arial", sans-serif;
   color: $orange;
   background-color: transparent;
   border: none;
@@ -108,6 +116,10 @@
       background-color: transparent;
     }
   }
+
+  @media(max-width: $phone-max) {
+    margin-bottom: 24px;
+  }
 }
 
 .coins__button::before {
@@ -125,6 +137,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  padding-left: 36px;
   cursor: pointer;
 }
 
@@ -132,7 +145,7 @@
   content: "";
   position: absolute;
   top: 0;
-  left: -36px;
+  left: 0;
   width: 24px;
   height: 24px;
   border: 2px solid $light-blue;
@@ -143,7 +156,7 @@
   display: none;
   position: absolute;
   top: 5px;
-  left: -31px;
+  left: 5px;
   width: 14px;
   height: 14px;
   background-image: url("@/assets/img/check.svg");
