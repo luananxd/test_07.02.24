@@ -1,29 +1,54 @@
-
-import AppCheckbox from './UI/AppCheckbox.vue';
 <template>
   <section class="coins section-block">
     <div class="coins__wrapper center-wrapper">
       <span class="coins__number section-number">02</span>
-      <h2 class="coins__title section-title">Кошелёк криптовалют</h2>
+      <h2 class="coins__title section-title">
+        Кошелёк криптовалют
+      </h2>
       <div class="coins__quantity-line">
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
-        <span class="coins__coin"></span>
+        <render />
       </div>
-      <p class="coins__balance"><span class="coins__count">45</span> biorobo монет</p>
+      <p class="coins__balance">
+        <span class="coins__count">{{ coinsStore.coinsBalance }}</span> biorobo
+        {{ getCoinsDescription(coinsStore.coinsBalance) }}
+      </p>
       <div class="coins__income">
-        <button class="coins__button" type="button">Нацыганить</button>
-        <AppCheckbox class="coins__label">Цыганить по 5 монет</AppCheckbox>
+        <button
+          class="coins__button"
+          type="button"
+          :disabled="coinsStore.disableButton"
+          @click="coinsStore.addCoins()"
+        >
+          Нацыганить
+        </button>
+        <AppCheckbox
+          v-model:is-checked="coinsStore.useModificator"
+          class="coins__label"
+        >
+          Цыганить по {{ coinsStore.modificator }} монет
+        </AppCheckbox>
       </div>
     </div>
   </section>
 </template>
+<script setup>
+import { h } from 'vue';
+import { useCoinsStore } from '../store/coinsStore';
+import { getCoinsDescription } from '../common/helpers';
+
+const coinsStore = useCoinsStore();
+const render = () => {
+  const coins = [];
+  for (let i = 1; i <= coinsStore.coinsBalance; i += 1) {
+    const coin = h('span', {
+      class: 'coins__coin',
+      style: `z-index: ${coinsStore.coinsBalance - i}`,
+    });
+    coins.push(coin);
+  }
+  return coins;
+};
+</script>
 
 <style lang="scss">
 @import "@/assets/scss/text-style.scss";
@@ -36,7 +61,7 @@ import AppCheckbox from './UI/AppCheckbox.vue';
   row-gap: 8px;
   margin-bottom: 24px;
 
-  @media(max-width: $phone-max) {
+  @media (max-width: $phone-max) {
     margin-bottom: 34px;
   }
 }
@@ -51,11 +76,7 @@ import AppCheckbox from './UI/AppCheckbox.vue';
 }
 
 .coins__coin:not(:first-child) {
-  margin-left: -9px;
-  mask-image: url("@/assets/img/coin-mask.svg");
-  mask-repeat: no-repeat;
-  mask-size: cover;
-  mask-position: -24px;
+  margin-left: -10px;
 }
 
 .coins__balance {
@@ -63,7 +84,7 @@ import AppCheckbox from './UI/AppCheckbox.vue';
   font-size: 24px;
   color: $light-blue;
 
-  @media(max-width: $pc-max) {
+  @media (max-width: $pc-max) {
     @include info-text;
     margin-bottom: 32px;
   }
@@ -76,7 +97,7 @@ import AppCheckbox from './UI/AppCheckbox.vue';
 .coins__income {
   display: flex;
 
-  @media(max-width: $phone-max) {
+  @media (max-width: $phone-max) {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -117,7 +138,7 @@ import AppCheckbox from './UI/AppCheckbox.vue';
     }
   }
 
-  @media(max-width: $phone-max) {
+  @media (max-width: $phone-max) {
     margin-bottom: 24px;
   }
 }
@@ -129,46 +150,5 @@ import AppCheckbox from './UI/AppCheckbox.vue';
   width: 100%;
   height: 1px;
   background-color: rgba(255, 134, 27, 0.5);
-}
-
-// Checbox
-
-.checkbox {
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding-left: 36px;
-  cursor: pointer;
-}
-
-.checkbox::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 24px;
-  border: 2px solid $light-blue;
-}
-
-.checkbox::after {
-  content: "";
-  display: none;
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 14px;
-  height: 14px;
-  background-image: url("@/assets/img/check.svg");
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.checkbox:has(.checkbox__input:checked)::after {
-  display: block;
-}
-
-.checkbox__title {
-  margin: 0;
 }
 </style>
