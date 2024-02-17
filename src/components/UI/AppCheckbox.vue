@@ -1,9 +1,19 @@
 <template>
   <label class="coins__label checkbox">
-    <input class="checkbox__input visually-hidden" type="checkbox" name="enable-modificator">
-    <p class="checkbox__title"><slot /></p>
+    <input
+      class="checkbox__input visually-hidden"
+      type="checkbox"
+      :name="$attrs.name"
+      :checked="isChecked"
+      @change="isChecked = !isChecked"
+    >
+    <p class="checkbox__text"><slot /></p>
   </label>
 </template>
+
+<script setup>
+const isChecked = defineModel('isChecked');
+</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/text-style.scss";
@@ -15,6 +25,20 @@
   position: relative;
   padding-left: 36px;
   cursor: pointer;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+
+  &:has(.checkbox__input:checked)::after {
+    display: block;
+  }
+
+  &:hover::before {
+    border-color: $gray;
+  }
+
+  &:hover::after {
+    opacity: 0.5;
+  }
 }
 
 .checkbox::before {
@@ -40,11 +64,10 @@
   background-position: center center;
 }
 
-.checkbox:has(.checkbox__input:checked)::after {
+.checkbox__text {
   display: block;
-}
-
-.checkbox__title {
+  width: 100%;
   margin: 0;
+  word-wrap: break-word;
 }
 </style>
