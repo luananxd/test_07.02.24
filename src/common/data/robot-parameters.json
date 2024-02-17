@@ -1,0 +1,30 @@
+[
+  {
+    "name": "type",
+    "title": "Тип биоробота",
+    "variants": [
+      {
+        "value": "frontend",
+        "description": "Frontend"
+      },
+      {
+        "value": "design",
+        "description": "Design"
+      }
+    ]
+  },
+  {
+    "name": "stabilizer",
+    "title": "Стабилизатор",
+    "variants": [
+      {
+        "value": "male",
+        "description": "Male"
+      },
+      {
+        "value": "female",
+        "description": "Female"
+      }
+    ]
+  }
+]
