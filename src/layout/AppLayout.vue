@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import AppHeader from "@/layout/AppHeader.vue";
-import HomePage from "@/pages/HomePage.vue";
+import AppHeader from './AppHeader.vue';
+import HomePage from '../pages/HomePage.vue';
 </script>
 
 <style lang="scss">

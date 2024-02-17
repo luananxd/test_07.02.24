@@ -3,7 +3,7 @@
     <div class="page-header__wrapper">
       <div class="page-header__logo logo">
         <svg class="logo__icon" viewBox="0 0 78 48" width="78" height="48" role="img" aria-label="Логотип фабрики биороботов">
-          <use href="@/assets/img/sprite.svg#logo"></use>
+          <use href="/sprite.svg#logo" />
         </svg>
       </div>
       <a href="#constructor" class="page-header__button">
@@ -12,8 +12,6 @@
     </div>
   </header>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/text-style.scss";
@@ -77,6 +75,8 @@
   text-decoration: none;
   border: 2px solid $orange;
   border-radius: 60px;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
 
   &:hover {
     background-color: $red-orange;
