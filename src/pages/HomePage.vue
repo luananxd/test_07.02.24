@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { h } from "vue";
+import { ref, computed, watch } from 'vue';
 
 import HomePagePreview from "@/components/HomePagePreview.vue";
 import HomePageCoins from "@/components/HomePageCoins.vue";
@@ -15,6 +15,31 @@ import HomePageMarket from "@/components/HomePageMarket.vue";
 import HomePageStock from "@/components/HomePageStock.vue";
 import HomePageInstallation from "@/components/HomePageInstallation.vue";
 
+import { useCoinsStore } from '../store/coinsStore';
+import { useRobotStore } from '../store/robotStore';
+
+const coinsStore = useCoinsStore();
+const robotStore = useRobotStore();
+
+// Позволяет следить за состоянием переменной в сторе
+
+const isCoinsLimit = computed(() => coinsStore.isCoinsLimit);
+const showCoinsModal = ref(false);
+
+const isProduced = computed(() => robotStore.isProduced);
+const showProducedModal = ref(false);
+
+watch(isCoinsLimit, (newValue) => {
+  if (newValue) {
+    showCoinsModal.value = true;
+  }
+});
+
+watch(isProduced, (newValue) => {
+  if (newValue) {
+    showProducedModal.value = true;
+  }
+});
 </script>
 
 <style lang="scss">
