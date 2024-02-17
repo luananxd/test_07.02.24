@@ -1,40 +1,38 @@
-
-import AppButton from './UI/AppButton.vue';
 <template>
   <section class="market section-block">
     <div class="market__wrapper center-wrapper">
       <span class="market__number section-number">03</span>
-      <h2 class="market__title section-title">Рынок комплектующих</h2>
+      <h2 class="market__title section-title">
+        Рынок комплектующих
+      </h2>
       <ul class="market__goods">
-        <li class="market__good good">
+        <li
+          v-for="component in dataStore.components"
+          :key="component.id"
+          class="market__good good"
+        >
           <div class="good__logo-wrapper">
             <svg class="good__logo" width="101" height="67">
-              <use href="@/assets/img/sprite.svg#biohand"></use>
+              <use :href="`/sprite.svg#${component.value}`" />
             </svg>
           </div>
-          <h3 class="good__title">Биорука</h3>
-          <p class="good__price">Стоимость: <span>7 монет</span></p>
-          <AppButton type="button" class="good__button button--red">Установить</AppButton>
-        </li>
-        <li class="market__good good">
-          <div class="good__logo-wrapper">
-            <svg class="good__logo" width="80" height="80">
-              <use href="@/assets/img/sprite.svg#chip"></use>
-            </svg>
-          </div>
-          <h3 class="good__title">Микрочип</h3>
-          <p class="good__price">Стоимость: <span>5 монет</span></p>
-          <AppButton type="button" class="good__button button--red">Установить</AppButton>
-        </li>
-        <li class="market__good good">
-          <div class="good__logo-wrapper">
-            <svg class="good__logo" width="88" height="88">
-              <use href="@/assets/img/sprite.svg#soul"></use>
-            </svg>
-          </div>
-          <h3 class="good__title">Душа</h3>
-          <p class="good__price">Стоимость: <span>25 монет</span></p>
-          <AppButton type="button" class="good__button button--red">Установить</AppButton>
+          <h3 class="good__title">
+            {{ component.name }}
+          </h3>
+          <p class="good__price">
+            Стоимость:
+            <span>
+              {{ component.priceForBuy }} {{ getCoinsDescription(component.priceForBuy) }}
+            </span>
+          </p>
+          <AppButton
+            type="button"
+            class="good__button button--red"
+            :disabled="canBuyComponent(component)"
+            @click="componentStore.buyComponent(component.id)"
+          >
+            Установить
+          </AppButton>
         </li>
       </ul>
     </div>
@@ -42,6 +40,16 @@ import AppButton from './UI/AppButton.vue';
 </template>
 
 <script setup>
+import { useDataStore } from '../store/dataStore';
+import { useCoinsStore } from '../store/coinsStore';
+import { useComponentsStore } from '../store/componentsStore';
+import { getCoinsDescription } from '../common/helpers';
+
+const dataStore = useDataStore();
+const coinsStore = useCoinsStore();
+const componentStore = useComponentsStore();
+
+const canBuyComponent = (component) => coinsStore.coinsBalance < component.priceForBuy;
 </script>
 
 <style lang="scss" scoped>
@@ -74,6 +82,8 @@ import AppButton from './UI/AppButton.vue';
 
 .good__logo {
   position: relative;
+  width: 100px;
+  height: 80px;
   filter: drop-shadow(0 8px 90px $orange);
 }
 
