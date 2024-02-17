@@ -1,5 +1,5 @@
 <template>
-  <button class="button">
+  <button type="button" class="button">
     <slot />
   </button>
 </template>
@@ -16,6 +16,7 @@
   font-weight: 500;
   text-align: center;
   border-radius: 60px;
+  border: none;
   cursor: pointer;
 
   &:disabled {
@@ -26,14 +27,15 @@
 .button--red {
   color: $white;
   background: linear-gradient($orange, $red-orange);
-  border: none;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
 
   &:hover {
-    background: $red-orange;
+    background: linear-gradient($red-orange, $red-orange);
   }
 
   &:active {
-    background: $orange;
+    background: linear-gradient($orange, $orange);
   }
 
   &:disabled {
@@ -46,6 +48,8 @@
   color: $blue;
   background: transparent;
   border: 2px solid $blue;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
 
   &:hover {
     color: $black;
@@ -69,6 +73,8 @@
   color: $white;
   background: transparent;
   border: 2px solid $orange;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
 
   &:hover {
     background-color: $red-orange;
