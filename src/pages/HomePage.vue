@@ -4,16 +4,39 @@
   <HomePageMarket />
   <HomePageStock />
   <HomePageInstallation />
+  <AppModal
+    :show-modal="showCoinsModal"
+    :icon-path="'src/assets/img/coin.png'"
+    @close="showCoinsModal = false"
+  >
+    <template #title>
+      Количество монет<br>ограничено
+    </template>
+    <template #text>
+      Вы не можете нацыганить более 100 монет biorobo
+    </template>
+  </AppModal>
+  <AppModal
+    :show-modal="showProducedModal"
+    @close="showProducedModal = false"
+  >
+    <template #title>
+      Биоробот<br>произведён
+    </template>
+    <template #text>
+      Поздравляем!<br>Вы произвели биоробота
+    </template>
+  </AppModal>
 </template>
 
 <script setup>
 import { ref, computed, watch } from 'vue';
 
-import HomePagePreview from "@/components/HomePagePreview.vue";
-import HomePageCoins from "@/components/HomePageCoins.vue";
-import HomePageMarket from "@/components/HomePageMarket.vue";
-import HomePageStock from "@/components/HomePageStock.vue";
-import HomePageInstallation from "@/components/HomePageInstallation.vue";
+import HomePagePreview from '../components/HomePagePreview.vue';
+import HomePageCoins from '../components/HomePageCoins.vue';
+import HomePageMarket from '../components/HomePageMarket.vue';
+import HomePageStock from '../components/HomePageStock.vue';
+import HomePageInstallation from '../components/HomePageInstallation.vue';
 
 import { useCoinsStore } from '../store/coinsStore';
 import { useRobotStore } from '../store/robotStore';
