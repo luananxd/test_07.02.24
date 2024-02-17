@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import AppLayout from "@/layout/AppLayout.vue";
+import AppLayout from './layout/AppLayout.vue';
 </script>
 
 <style lang="scss">
@@ -17,7 +17,12 @@ import AppLayout from "@/layout/AppLayout.vue";
 }
 
 html {
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
+
+  &:has(.modal) {
+    overflow: hidden;
+  }
 }
 
 .visually-hidden {
