@@ -2,7 +2,9 @@
   <HomePagePreview />
   <HomePageCoins />
   <HomePageMarket />
-  <HomePageStock />
+  <HomePageStock 
+    @open-coins-modal="showCoinsModal = true"
+  />
   <HomePageInstallation />
   <AppModal
     :show-modal="showCoinsModal"

@@ -27,12 +27,16 @@ export const useComponentsStore = defineStore('componentsStore', () => {
     const coinsStore = useCoinsStore();
 
     const currentComponentPrice = dataStore.components.find((component) => component.id === componentId).priceForSell;
-    if (coinsStore.coinsBalance + currentComponentPrice > coinsStore.limit) {
-      coinsStore.coinsBalance = coinsStore.limit;
+    if (coinsStore.coinsBalance === coinsStore.limit) {
       return;
     }
 
-    coinsStore.coinsBalance += currentComponentPrice;
+    if (coinsStore.coinsBalance + currentComponentPrice > coinsStore.limit) {
+      coinsStore.coinsBalance = coinsStore.limit;
+    } else {
+      coinsStore.coinsBalance += currentComponentPrice;
+    }
+
     decreaseComponentQuantity(componentId);
   };
 

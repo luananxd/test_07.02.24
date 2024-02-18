@@ -25,7 +25,7 @@
             type="button"
             class="component__button button--blue"
             :disabled="canSellComponent(component.id)"
-            @click="componentStore.sellComponent(component.id)"
+            @click="componentStore.sellComponent(component.id), openCoinsLimitModal()"
           >
             Продать
           </AppButton>
@@ -37,13 +37,21 @@
 
 <script setup>
 import { useDataStore } from '../store/dataStore';
+import { useCoinsStore } from '../store/coinsStore';
 import { useComponentsStore } from '../store/componentsStore';
 import { getCoinsDescription } from '../common/helpers';
 
 const dataStore = useDataStore();
+const coinsStore = useCoinsStore();
 const componentStore = useComponentsStore();
+const emit = defineEmits(['open-coins-modal']);
 
 const canSellComponent = (componentId) => componentStore.getComponentQuantity(componentId) <= 0;
+const openCoinsLimitModal = () => {
+  if (coinsStore.coinsBalance >= coinsStore.limit) {
+    emit('open-coins-modal');
+  }
+}
 </script>
 
 <style lang="scss" scoped>
