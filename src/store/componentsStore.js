@@ -66,6 +66,8 @@ export const useComponentsStore = defineStore('componentsStore', () => {
   return {
     componentsInStock,
     getComponentQuantity,
+    increaseComponentQuantity,
+    decreaseComponentQuantity,
     buyComponent,
     sellComponent,
   };

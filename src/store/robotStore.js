@@ -4,6 +4,7 @@ import { ref, reactive, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { useDataStore } from './dataStore';
 import { useCoinsStore } from './coinsStore';
+import { useComponentsStore } from './componentsStore';
 
 import { getComponentDescription } from '../common/helpers';
 
@@ -116,6 +117,7 @@ export const useRobotStore = defineStore('robotStore', () => {
   );
 
   const setComponent = (componentId) => {
+    const componentsStore = useComponentsStore();
     const currentComponentIndex = installedComponents.findIndex(
       (component) => component.id === componentId,
     );
@@ -130,6 +132,7 @@ export const useRobotStore = defineStore('robotStore', () => {
   };
 
   const removeComponent = (componentId) => {
+    const componentsStore = useComponentsStore();
     const currentComponentIndex = installedComponents.findIndex(
       (component) => component.id === componentId,
     );
@@ -137,6 +140,14 @@ export const useRobotStore = defineStore('robotStore', () => {
       installedComponents[currentComponentIndex].quantity -= 1;
     } else {
       installedComponents.splice(currentComponentIndex, 1);
+    }
+  };
+
+  const manageComponents = (event) => {
+    if (event.target.checked) {
+      robotStore.setComponent(event.target.dataset.componentId);
+    } else {
+      robotStore.removeComponent(event.target.dataset.componentId);
     }
   };
 

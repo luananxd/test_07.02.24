@@ -61,13 +61,10 @@
                     class="visually-hidden"
                     type="checkbox"
                     :data-component-id="component.id"
-                    :checked="
-                      getStartQuantity(component.id) > index
-                        && componentsStore.getComponentQuantity(component.id)
-                    "
+                    :checked="getStartQuantity(component.id) > index"
                     :disabled="
-                      index + 1
-                        > componentsStore.getComponentQuantity(component.id)
+                      index + 1 > componentsStore.getComponentQuantity(component.id) &&
+                      index + 1 > robotStore.getComponentQuantity(component.id)
                     "
                     @change="manageComponents"
                   />
@@ -130,8 +127,10 @@ const getStartQuantity = (componentId) => (
 const manageComponents = (event) => {
   if (event.target.checked) {
     robotStore.setComponent(event.target.dataset.componentId);
+    componentsStore.decreaseComponentQuantity(event.target.dataset.componentId);
   } else {
     robotStore.removeComponent(event.target.dataset.componentId);
+    componentsStore.increaseComponentQuantity(event.target.dataset.componentId);
   }
 };
 </script>
