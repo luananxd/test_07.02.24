@@ -60,6 +60,7 @@ const render = () => {
   flex-wrap: wrap;
   row-gap: 8px;
   margin-bottom: 24px;
+  padding-left: 10px;
 
   @media (max-width: $phone-max) {
     margin-bottom: 34px;
@@ -70,14 +71,15 @@ const render = () => {
   display: block;
   width: 16px;
   height: 20px;
+  margin-left: -10px;
   background-image: url("@/assets/img/coin.png");
   background-position: center, center;
   background-repeat: no-repeat;
 }
 
-.coins__coin:not(:first-child) {
-  margin-left: -10px;
-}
+// .coins__coin:not(:first-child) {
+//   margin-left: -10px;
+// }
 
 .coins__balance {
   margin-bottom: 44px;
