@@ -248,6 +248,7 @@ const manageComponents = (event) => {
   height: 320px;
   background-image: url("../assets/img/robots-sprite.png");
   background-repeat: no-repeat;
+  background-size: 1016px 1008px;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
 
