@@ -11,31 +11,43 @@
       >
         <div class="constructor__body">
           <div class="constructor__settings">
-            <fieldset class="constructor__parameter parameter">
-              <legend class="parameter__title">Параметр</legend>
+            <fieldset
+              v-for="parameter in productionStore.parameters"
+              class="constructor__parameter parameter"
+            >
+              <legend class="parameter__title">{{ parameter.title }}</legend>
               <AppRadio
-                v-model:link="moke"
+                v-for="variant in parameter.variants"
+                v-model:link="productionStore[parameter.name]"
                 class="parameter__label"
-                name="Имя компонента"
-                value="Значение"
+                :name="parameter.name"
+                :value="variant.value"
                 data-test="2"
               >
-                Описание
+                {{ variant.description }}
               </AppRadio>
             </fieldset>
           </div>
           <fieldset class="constructor__components components">
             <legend class="visually-hidden">Добавить компоненты для производства</legend>
-            <ul class="components__list">
-              <li>
-                <label class="`components__item components__item--biohand`">
+            <ul
+              v-for="component in productionStore.constructorTemplate"
+              class="components__list"
+            >
+              <li
+                v-for="(item, index) in component.cellsQuantity"
+              >
+                <label
+                  :class="`components__item components__item--${component.name}`"
+                >
                   <svg class="components__logo">
-                    <use href=""/>
+                    <use :href="`/sprite.svg#${component.name}`"/>
                   </svg>
                   <input
+                    v-model="component.values"
                     class="visually-hidden"
                     type="checkbox"
-                    data-component-id="2"
+                    :value="`${component.name}-${index}`"
                   />
                   <span class="visually-hidden">Вернуть компонент биорука на склад</span>
                 </label>
@@ -69,6 +81,10 @@
 </template>
 
 <script setup>
+import { useProductionStore } from '../store/productionStore';
+
+const productionStore = useProductionStore();
+
 const moke = true;
 </script>
 

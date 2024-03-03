@@ -4,19 +4,22 @@
       <span class="market__number section-number">03</span>
       <h2 class="market__title section-title">Рынок комплектующих</h2>
       <ul class="market__goods">
-        <li class="market__good good">
+        <li
+          v-for="component in componentsStore.components"
+          :key="component.id"
+          class="market__good good">
           <div class="good__logo-wrapper">
             <svg class="good__logo" width="101" height="67">
-              <use :href="`/sprite.svg#biohand`" />
+              <use :href="`/sprite.svg#${component.value}`" />
             </svg>
           </div>
           <h3 class="good__title">
-            Имя компонента
+            {{ component.name }}
           </h3>
           <p class="good__price">
             Стоимость:
             <span>
-              Х монет
+              {{ component.priceForBuy }} {{ getCoinsDescription(component.priceForBuy) }}
             </span>
           </p>
           <AppButton
@@ -32,6 +35,12 @@
 </template>
 
 <script setup>
+import { useComponentsStore } from '../store/componentsStore';
+
+import { getCoinsDescription } from '../common/helpers';
+
+const componentsStore = useComponentsStore();
+
 </script>
 
 <style lang="scss" scoped>

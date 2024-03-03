@@ -4,12 +4,17 @@
       <span class="stock__number section-number">04</span>
       <h2 class="stock__title section-title">Склад</h2>
       <ul class="stock__components">
-        <li class="stock__component component">
-          <h3 class="component__title">Имя компонента</h3>
+        <li
+          v-for="component in componentsStore.components"
+          :key="component.id"
+          class="stock__component component">
+          <h3 class="component__title">
+            {{ component.name }}
+          </h3>
           <p class="component__price">
-            Стоимость: <span>5 монет</span>
+            Стоимость: <span>{{ component.priceForSell }} {{ getCoinsDescription(component.priceForSell) }}</span>
           </p>
-          <span class="component__quantity">3 шт</span>
+          <span class="component__quantity">{{ component.quantity }} шт</span>
           <AppButton
             type="button"
             class="component__button button--blue"
@@ -23,7 +28,13 @@
 </template>
 
 <script setup>
+import { useComponentsStore } from '../store/componentsStore';
 
+import { getCoinsDescription } from '../common/helpers';
+
+const componentsStore = useComponentsStore();
+
+console.log(componentsStore.components[0])
 </script>
 
 <style lang="scss" scoped>

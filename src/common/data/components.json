@@ -4,23 +4,20 @@
     "name": "Биорука",
     "value": "biohand",
     "priceForBuy": 7,
-    "priceForSell": 5,
-    "requiredQuantity": 4
+    "priceForSell": 5
   },
   {
     "id": "2",
     "name": "Микрочип",
     "value": "chip",
     "priceForBuy": 5,
-    "priceForSell": 3,
-    "requiredQuantity": 4
+    "priceForSell": 3
   },
   {
     "id": "3",
     "name": "Душа",
     "value": "soul",
     "priceForBuy": 25,
-    "priceForSell": 15,
-    "requiredQuantity": 1
+    "priceForSell": 15
   }
 ]
