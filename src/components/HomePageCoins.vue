@@ -2,9 +2,7 @@
   <section class="coins section-block">
     <div class="coins__wrapper center-wrapper">
       <span class="coins__number section-number">02</span>
-      <h2 class="coins__title section-title">
-        Кошелёк криптовалют
-      </h2>
+      <h2 class="coins__title section-title">Кошелёк криптовалют</h2>
       <div class="coins__quantity-line">
         <render />
       </div>
@@ -13,12 +11,7 @@
         {{ getCoinsDescription(coinsStore.coinsBalance) }}
       </p>
       <div class="coins__income">
-        <button
-          class="coins__button"
-          type="button"
-          :disabled="coinsStore.disableButton"
-          @click="coinsStore.addCoins()"
-        >
+        <button class="coins__button" type="button">
           Нацыганить
         </button>
         <AppCheckbox
