@@ -25,6 +25,7 @@
           <AppButton
             type="button"
             class="good__button button--red"
+            @click="buyComponent(component.id, component.priceForBuy)"
           >
             Установить
           </AppButton>
@@ -36,10 +37,17 @@
 
 <script setup>
 import { useComponentsStore } from '../store/componentsStore';
+import { useCoinsStore } from '../store/coinsStore';
 
 import { getCoinsDescription } from '../common/helpers';
 
 const componentsStore = useComponentsStore();
+const coinsStore = useCoinsStore();
+
+const buyComponent = (componentId, price) => {
+  componentsStore.addComponent(componentId, 1);
+  coinsStore.removeCoins(price);
+}
 
 </script>
 

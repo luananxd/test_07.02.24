@@ -11,7 +11,23 @@ export const useComponentsStore = defineStore("componentsStore", () => {
     }
   }));
 
+  const addComponent = (componentId, quantity) => {
+    const currentComponentIndex = components.findIndex((component) => component.id === componentId);
+    components[currentComponentIndex].quantity += quantity;
+  }
+
+  const removeComponent = (componentId, quantity) => {
+    const currentComponentIndex = components.findIndex((component) => component.id === componentId);
+    if(components[currentComponentIndex].quantity - quantity > 0) {
+      components[currentComponentIndex].quantity -= quantity;
+    } else {
+      components[currentComponentIndex].quantity = 0;
+    }
+  }
+
   return {
     components,
+    addComponent,
+    removeComponent,
   }
 })
