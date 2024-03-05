@@ -32,12 +32,23 @@
 </template>
 
 <script setup>
+import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useCoinsStore } from '../store/coinsStore';
 import HomePagePreview from '../components/HomePagePreview.vue';
 import HomePageCoins from '../components/HomePageCoins.vue';
 import HomePageMarket from '../components/HomePageMarket.vue';
 import HomePageStock from '../components/HomePageStock.vue';
 import HomePageInstallation from '../components/HomePageInstallation.vue';
 
+const coinsStore = useCoinsStore();
+
+const { balance: coinsBalance } = storeToRefs(coinsStore);
+const showCoinsModal = ref(false);
+
+watch(coinsBalance, (newValue) => {
+  showCoinsModal.value = newValue > coinsStore.limit || false;
+})
 </script>
 
 <style lang="scss">

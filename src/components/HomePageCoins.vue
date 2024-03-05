@@ -18,6 +18,7 @@
           class="coins__button"
           type="button"
           @click="coinsStore.addCoins(coinsStore.isUseModificator ? coinsStore.modificator : 1)"
+          :disabled="coinsStore.balance > coinsStore.limit"
         >
           Нацыганить
         </button>

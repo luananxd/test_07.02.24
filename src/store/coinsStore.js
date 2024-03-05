@@ -19,6 +19,7 @@ export const useCoinsStore = defineStore("coinsStore", () => {
     balance,
     modificator,
     isUseModificator,
+    limit,
     addCoins,
     removeCoins,
   }
