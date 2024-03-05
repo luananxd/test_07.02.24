@@ -7,16 +7,19 @@ export const useProductionStore = defineStore("productionStore", () => {
   const parameters = reactive(parametersJSON);
   const constructorTemplate = reactive([
     {
+      id: "1",
       name: "biohand",
       values: ["biohand-1"],
       cellsQuantity: 4,
     },
     {
+      id: "2",
       name: "chip",
       values: [],
       cellsQuantity: 4,
     },
     {
+      id: "3",
       name: "soul",
       values: [],
       cellsQuantity: 1,

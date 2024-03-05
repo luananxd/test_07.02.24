@@ -35,7 +35,6 @@
 
 <script setup>
 import { useCoinsStore } from '../store/coinsStore';
-
 import { getCoinsDescription } from '../common/helpers';
 
 const coinsStore = useCoinsStore();
