@@ -26,6 +26,7 @@
             type="button"
             class="good__button button--red"
             @click="buyComponent(component.id, component.priceForBuy)"
+            :disabled="coinsStore.balance < component.priceForBuy"
           >
             Установить
           </AppButton>

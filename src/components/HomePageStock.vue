@@ -18,6 +18,8 @@
           <AppButton
             type="button"
             class="component__button button--blue"
+            @click="sellComponent(component.id, component.priceForSell)"
+            :disabled="component.quantity < 1"
           >
             Продать
           </AppButton>
@@ -29,12 +31,17 @@
 
 <script setup>
 import { useComponentsStore } from '../store/componentsStore';
+import { useCoinsStore } from '../store/coinsStore';
 
 import { getCoinsDescription } from '../common/helpers';
 
 const componentsStore = useComponentsStore();
+const coinsStore = useCoinsStore();
 
-console.log(componentsStore.components[0])
+const sellComponent = (componentId, price) => {
+  componentsStore.removeComponent(componentId, 1);
+  coinsStore.addCoins(price);
+}
 </script>
 
 <style lang="scss" scoped>
