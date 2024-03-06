@@ -11,6 +11,10 @@ export const useComponentsStore = defineStore("componentsStore", () => {
     }
   }));
 
+  const getComponentQuantity = (componentId) => {
+    return components.find((component) => component.id === componentId).quantity;
+  }
+
   const addComponent = (componentId, quantity) => {
     const currentComponentIndex = components.findIndex((component) => component.id === componentId);
     components[currentComponentIndex].quantity += quantity;
@@ -27,6 +31,7 @@ export const useComponentsStore = defineStore("componentsStore", () => {
 
   return {
     components,
+    getComponentQuantity,
     addComponent,
     removeComponent,
   }

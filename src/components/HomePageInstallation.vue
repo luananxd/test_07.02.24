@@ -48,6 +48,7 @@
                     class="visually-hidden"
                     type="checkbox"
                     :value="`${component.name}-${index}`"
+                    :disabled="componentsStore.getComponentQuantity(component.id) < index + 1"
                   />
                   <span class="visually-hidden">Вернуть компонент биорука на склад</span>
                 </label>
@@ -70,9 +71,10 @@
         </div>
         <div class="constructor__image-wrapper">
           <div
-            class="constructor__robot constructor__robot--frontend-male-produced"
+            class="constructor__robot"
+            :class="productionStore.robotConstructorClass"
             role="img"
-            aria-label="Твой робот. Статус: Произведен"
+            :aria-label="`Твой робот. Статус: ${productionStore.robotStatus.title}`"
           ></div>
         </div>
       </form>
@@ -81,11 +83,11 @@
 </template>
 
 <script setup>
+import { useComponentsStore } from '../store/componentsStore';
 import { useProductionStore } from '../store/productionStore';
 
+const componentsStore = useComponentsStore();
 const productionStore = useProductionStore();
-
-const moke = true;
 </script>
 
 <style lang="scss" scoped>
