@@ -31,7 +31,7 @@
           <fieldset class="constructor__components components">
             <legend class="visually-hidden">Добавить компоненты для производства</legend>
             <ul
-              v-for="component in productionStore.constructorTemplate"
+              v-for="(component, componentIndex) in productionStore.constructorTemplate"
               class="components__list"
             >
               <li
@@ -44,11 +44,12 @@
                     <use :href="`/sprite.svg#${component.name}`"/>
                   </svg>
                   <input
-                    v-model="component.values"
                     class="visually-hidden"
                     type="checkbox"
+                    v-model="component.values"
+                    @change="toggleComponentInStock(component.id)"
                     :value="`${component.name}-${index}`"
-                    :disabled="componentsStore.getComponentQuantity(component.id) < index + 1"
+                    :disabled="getAvailableComponentQuantity(component.id) < index + 1"
                   />
                   <span class="visually-hidden">Вернуть компонент биорука на склад</span>
                 </label>
@@ -61,12 +62,17 @@
             <AppButton
               class="constructor__button button--red-border"
               type="submit"
+              @click.prevent="createRobot"
+              :disabled="productionStore.robotStatus.value !== 'available'"
             >
-              Произвести за 10 монет
+              Произвести за {{ productionStore.robotProducePrice }} монет
             </AppButton>
           </div>
-          <p class="constructor__description">
-            Не хвататет 2 биоруки
+          <p 
+            v-if="productionStore.robotStatus.value === 'unavailable'"
+            class="constructor__description"
+          >
+            {{ productionStore.constructorDescription }}
           </p>
         </div>
         <div class="constructor__image-wrapper">
@@ -85,9 +91,31 @@
 <script setup>
 import { useComponentsStore } from '../store/componentsStore';
 import { useProductionStore } from '../store/productionStore';
+import { useCoinsStore } from '../store/coinsStore';
+
+import { storeToRefs } from 'pinia';
 
 const componentsStore = useComponentsStore();
 const productionStore = useProductionStore();
+const coinsStore = useCoinsStore();
+const { balance: coinsBalance } = storeToRefs(coinsStore);
+
+const getAvailableComponentQuantity = (componentId) => {
+  return componentsStore.getComponentQuantity(componentId) + productionStore.getComponentQuantity(componentId);
+}
+
+const toggleComponentInStock = (componentId) => {
+  if(event.target.checked) {
+    componentsStore.removeComponent(componentId, 1);
+  } else {
+    componentsStore.addComponent(componentId, 1);
+  }
+}
+
+const createRobot = () => {
+  productionStore.isProduced = true;
+  coinsBalance.value -= productionStore.robotProducePrice;
+}
 </script>
 
 <style lang="scss" scoped>
