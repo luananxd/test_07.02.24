@@ -31,16 +31,20 @@
 
 <script setup>
 import { useComponentsStore } from '../store/componentsStore';
+import { useProductionStore } from '../store/productionStore';
 import { useCoinsStore } from '../store/coinsStore';
 
 import { getCoinsDescription } from '../common/helpers';
+import { storeToRefs } from 'pinia';
 
 const componentsStore = useComponentsStore();
+const productionStore = useProductionStore();
 const coinsStore = useCoinsStore();
+const { balance: coinsBalance } = storeToRefs(coinsStore);
 
 const sellComponent = (componentId, price) => {
   componentsStore.removeComponent(componentId, 1);
-  coinsStore.addCoins(price);
+  coinsBalance.value += price;
 }
 </script>
 

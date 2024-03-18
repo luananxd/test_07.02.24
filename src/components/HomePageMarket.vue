@@ -41,13 +41,15 @@ import { useComponentsStore } from '../store/componentsStore';
 import { useCoinsStore } from '../store/coinsStore';
 
 import { getCoinsDescription } from '../common/helpers';
+import { storeToRefs } from 'pinia';
 
 const componentsStore = useComponentsStore();
 const coinsStore = useCoinsStore();
+const { balance: coinsBalance } = storeToRefs(coinsStore);
 
 const buyComponent = (componentId, price) => {
   componentsStore.addComponent(componentId, 1);
-  coinsStore.removeCoins(price);
+  coinsBalance.value -= price;
 }
 
 </script>

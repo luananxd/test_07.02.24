@@ -17,7 +17,7 @@
         <button
           class="coins__button"
           type="button"
-          @click="coinsStore.addCoins(coinsStore.isUseModificator ? coinsStore.modificator : 1)"
+          @click="() => coinsBalance += coinsStore.isUseModificator ? coinsStore.modificator : 1"
           :disabled="coinsStore.balance > coinsStore.limit"
         >
           Нацыганить
@@ -37,7 +37,10 @@
 import { useCoinsStore } from '../store/coinsStore';
 import { getCoinsDescription } from '../common/helpers';
 
+import { storeToRefs } from 'pinia';
+
 const coinsStore = useCoinsStore();
+const { balance: coinsBalance } = storeToRefs(coinsStore);
 </script>
 
 <style lang="scss">
